@@ -1,0 +1,20 @@
+{% extends "User/class_list.html" %}
+{% block content %}
+<div style="  position: absolute;top: 50%;left: 50%;transform: translate(-50%, -10%); height:40vh">
+        <table style="width:40vw">
+            <tbody>
+                {% if tests %}
+                    {% for test in tests %}
+                        <tr style="height:1vw;">
+                                <td>
+                                    <center><h2 class="lead"><a class="font_is" href="{{test.get_absolute_url}}">{{ test.name }} on {{test.date}}</a></h2></center>
+                                </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <p>Such class does not exist</p>
+                {% endif %}
+            </tbody>
+        </table>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "User/sidebar.html" %}
+{%block classes%}
+<a href="#homeSubmenu"  {% if class_list %} data-toggle="collapse" {% endif %} aria-expanded="false" class="dropdown-toggle">Classes</a>
+    <ul class="collapse list-unstyled" id="homeSubmenu">
+        {% for class in class_list %}
+            <li>
+                <a class="font_is" href='{{class.get_absolute_url}}'>{{ class.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</li>
+{%endblock%}
+                
+
+

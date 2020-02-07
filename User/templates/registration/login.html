@@ -1,0 +1,67 @@
+{% extends "registration/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+  {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+  
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <p>Please login to see this page.</p>
+    {% endif %}
+  {% endif %}
+  
+  <form method="post" class="from-group login100-form" action="{% url 'login' %}">
+    {% csrf_token %}
+
+    <span class="login100-form-logo">
+        <i class="zmdi zmdi-landscape"></i>
+    </span>
+    <span class="login100-form-title p-b-35 p-t-27">
+        Test Us
+    </span>
+    <div class="wrap-input100 validate-input" data-validate = "Enter username">
+        <div class="input100">
+            {{ form.username|as_crispy_field }}
+        </div>
+        <br>
+        <span class="focus-input100" data-placeholder="&#xf207;"></span>
+    </div>
+
+    <div class="wrap-input100 validate-input" data-validate="Enter password">
+        <div class="input100">
+            {{ form.password|as_crispy_field }}
+        </div>
+        <br>
+        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+    </div>
+    <div class="contact100-form-checkbox">
+        <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+        <label class="label-checkbox100" for="ckb1">
+            Remember me
+        </label>
+    </div>
+
+    <div class="container-login100-form-btn">
+        <button type="submit" class="login100-form-btn">
+            Login
+        </button>
+        <input type="hidden" name="next" value="{{ next }}">
+    </div>
+
+    <div class="text-center p-t-90">
+        <a class="txt1" href="{% url 'password_reset' %}">
+            Forgot Password?
+        </a>
+    </div>
+  </form>
+<!--   
+  {# Assumes you setup the password_reset view in your URLconf #}
+  <p><a href="{% url 'password_reset' %}">Lost password?</a></p> -->
+  
+{% endblock %}

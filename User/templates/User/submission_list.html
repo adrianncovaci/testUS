@@ -1,0 +1,42 @@
+{% extends "User/class_list.html" %}
+
+{% block content %}
+
+ <p>
+    <button type="button" class="btn btn-primary js-create-book">
+      <span class="glyphicon glyphicon-plus"></span>
+      New Submission
+    </button>
+  </p>
+
+  <table class="table" id="book-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Student</th>
+        <th>Test</th>
+        <th>Text</th>
+      </tr>
+    </thead>
+    <tbody>
+            {% for submit in submissions %}
+            <tr>
+                <td>{{ submit.id }}</td>
+                <td>{{ submit.user }}</td>
+                <td>{{ submit.test }}</td>
+                <td><a href="pdf/{{submit.pk}}">{{ submit.text|truncatewords:10 }}</a></td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="7" class="text-center bg-warning">No Submissions</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="modal fade" id="modal-book">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      </div>
+    </div>
+{% endblock %}
